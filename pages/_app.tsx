@@ -5,6 +5,9 @@ import { ReactQueryDevtools } from "react-query/devtools";
 import "./scss/index.scss";
 import Gnb from "./component/Gnb";
 
+if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
+  require("./mocks");
+}
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
   return (
