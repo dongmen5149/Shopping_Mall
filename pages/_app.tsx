@@ -4,10 +4,12 @@ import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import "./scss/index.scss";
 import Gnb from "./component/Gnb";
+import initMockAPI from "./mocks";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-  require("./mocks");
+  initMockAPI();
 }
+
 function MyApp({ Component, pageProps }: AppProps) {
   const queryClient = getClient();
   return (

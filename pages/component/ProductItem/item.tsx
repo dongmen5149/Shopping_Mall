@@ -1,22 +1,20 @@
 import Link from "next/link";
-import { Product } from "../../types";
+import { Product } from "../../graphql/products";
 
 const ProductItem = ({
-  category,
-  image,
-  price,
-  rating,
-  title,
   id,
+  imageUrl,
+  price,
+  title,
+  description,
+  createdAt,
 }: Product) => (
   <li className="product-item">
     <Link href={`/products/${id}`}>
       <a>
-        <span className="product-item__category">{category}</span>
         <p className="product-item__title">{title}</p>
-        <img className="product-item__image" src={image} alt={image} />
+        <img className="product-item__image" src={imageUrl} />
         <span className="product-item__price">${price}</span>
-        <span className="product-item__rating">{rating.rate}</span>
       </a>
     </Link>
   </li>

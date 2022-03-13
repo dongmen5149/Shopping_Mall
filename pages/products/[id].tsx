@@ -1,18 +1,15 @@
 import type { NextPage } from "next";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
-import { fetcher, QueryKeys } from "../queryClient";
-import { Product } from "../types";
+import { graphqlFetcher, QueryKeys } from "../queryClient";
 import ProductDetail from "../component/ProductItem/details";
+import { GET_PRODUCT, Product } from "../graphql/products";
 
 const ProductDetailPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const { data } = useQuery<Product>([QueryKeys.PRODUCTS, id], () =>
-    fetcher({
-      method: "GET",
-      path: `/products/${id}`,
-    })
+    graphqlFetcher(GET_PRODUCT, { id })
   );
 
   if (!data) return null;

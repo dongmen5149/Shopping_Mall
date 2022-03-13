@@ -1,15 +1,13 @@
 import type { NextPage } from "next";
 import { useQuery } from "react-query";
 import ProductItem from "../component/ProductItem/item";
-import { fetcher, QueryKeys } from "../queryClient";
+import GET_PRODUCTS, { Products } from "../graphql/products";
+import { graphqlFetcher, QueryKeys } from "../queryClient";
 import { Product } from "../types";
 
 const ProductList: NextPage = () => {
-  const { data } = useQuery<Product[]>(QueryKeys.PRODUCTS, () =>
-    fetcher({
-      method: "GET",
-      path: "/products",
-    })
+  const { data } = useQuery<Products>(QueryKeys.PRODUCTS, () =>
+    graphqlFetcher(GET_PRODUCTS)
   );
 
   console.log(data);
@@ -25,7 +23,7 @@ const ProductList: NextPage = () => {
     <div className="products">
       <h2>상품목록</h2>
       <ul>
-        {data?.map((product) => (
+        {data?.products?.map((product) => (
           <ProductItem {...product} key={product.id} />
         ))}
       </ul>
