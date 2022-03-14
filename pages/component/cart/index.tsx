@@ -1,5 +1,14 @@
-const Cart = () => {
-  return <div>카트페이지</div>;
+import { CartType } from "../../graphql/cart";
+import CartItem from "./item";
+
+const CartList = ({ items }: { items: CartType[] }) => {
+  return (
+    <ul>
+      {items.map((item) => (
+        <CartItem {...item} key={item.id} />
+      ))}
+    </ul>
+  );
 };
 
-export default Cart;
+export default CartList;
